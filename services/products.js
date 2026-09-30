@@ -20,8 +20,13 @@ async function addProduct(product) {
   return product
 }
 
+async function updateProduct(id, data) {
+  return await database.updateProduct(id, data)
+}
+
 module.exports = {
   getProducts,
   getProduct,
-  addProduct
+  addProduct,
+  updateProduct
 }

@@ -24,8 +24,20 @@ async function addProduct(req, res) {
   res.status(201).json(product)
 }
 
+async function updateProduct(req, res) {
+  const product = await products.updateProduct(req.params.id, req.body)
+
+  if (product) {
+    clearCache()
+    res.json(product)
+  } else {
+    res.status(404).send('Product not found')
+  }
+}
+
 module.exports = {
   getProducts,
   getProduct,
-  addProduct
+  addProduct,
+  updateProduct
 }
