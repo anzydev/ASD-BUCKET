@@ -18,16 +18,15 @@ app.get('/', (req, res) => {
 
 // this is used for products route
 app.get('/products', async (req, res) => {
-  const data = await fs.readFile(filePath, 'utf-8')
-  const products = JSON.parse(data)
-
+  const products = await readfile()
   res.json(products)
 })
 
 // this is for products by id 
 app.get('/products/:id', async (req, res) => {
-  const data = await fs.readFile(filePath, 'utf-8')
-  const products = JSON.parse(data)
+  //new code started
+  const products = await readfile()
+  //new code ended
 
   const product = products.find(product => product.id === Number(req.params.id))
 
