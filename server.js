@@ -1,16 +1,7 @@
 const express = require('express');
-const fs = require('fs').promises
-const path = require('path')
+const readfile = require('./database/products')
 const app = express()
 const port = 3000
-
-const filePath = path.join(__dirname, 'db.json')
-
-// this is the function i made for reading the files
-async function readfile() {
-  const data = await fs.readFile(filePath, 'utf-8')
-  return JSON.parse(data)
-}
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
