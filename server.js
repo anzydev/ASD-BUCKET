@@ -6,10 +6,17 @@ const port = 3000
 
 const filePath = path.join(__dirname, 'db.json')
 
+// this is the function i made for reading the files
+async function readfile() {
+  const data = await fs.readFile(filePath, 'utf-8')
+  return JSON.parse(data)
+}
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+// this is used for products route
 app.get('/products', async (req, res) => {
   const data = await fs.readFile(filePath, 'utf-8')
   const products = JSON.parse(data)
@@ -17,16 +24,18 @@ app.get('/products', async (req, res) => {
   res.json(products)
 })
 
+// this is for products by id 
 app.get('/products/:id', async (req, res) => {
   const data = await fs.readFile(filePath, 'utf-8')
   const products = JSON.parse(data)
 
   const product = products.find(product => product.id === Number(req.params.id))
 
+//   this is humourous error i thought of
   if (product) {
     res.json(product)
   } else {
-    res.status(404).send('Product is not there bro')
+    res.status(404).send('Good try bro, but product aint here 🥲')
   }
 })
 
