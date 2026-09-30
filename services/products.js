@@ -28,10 +28,15 @@ async function patchProduct(id, data) {
   return await database.patchProduct(id, data)
 }
 
+async function deleteProduct(id) {
+  return await database.deleteProduct(id)
+}
+
 module.exports = {
   getProducts,
   getProduct,
   addProduct,
   updateProduct,
-  patchProduct
+  patchProduct,
+  deleteProduct
 }

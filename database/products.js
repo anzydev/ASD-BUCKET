@@ -48,9 +48,26 @@ async function patchProduct(id, data) {
   return products[index]
 }
 
+async function deleteProduct(id) {
+  const products = await readfile()
+
+  const index = products.findIndex(product => product.id === Number(id))
+
+  if (index === -1) {
+    return null
+  }
+
+  const product = products.splice(index, 1)[0]
+
+  await savefile(products)
+
+  return product
+}
+
 module.exports = {
   readfile,
   savefile,
   updateProduct,
-  patchProduct
+  patchProduct,
+  deleteProduct
 }
