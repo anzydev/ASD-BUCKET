@@ -1,9 +1,20 @@
 const express = require('express');
+const fs = require('fs').promises
+const path = require('path')
 const app = express()
 const port = 3000
 
+const filePath = path.join(__dirname, 'db.json')
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
+})
+
+app.get('/products', async (req, res) => {
+  const data = await fs.readFile(filePath, 'utf-8')
+  const products = JSON.parse(data)
+
+  res.json(products)
 })
 
 app.listen(port, () => {
