@@ -2,57 +2,88 @@ const products = require('../services/products')
 const { clearCache } = require('../middleware/cache')
 
 async function getProducts(req, res) {
-  const data = await products.getProducts()
-  res.sendCache(data)
+  try {
+    const data = await products.getProducts()
+    res.sendCache(data)
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Server error')
+  }
 }
 
 async function getProduct(req, res) {
-  const product = await products.getProduct(req.params.id)
+  try {
+    const product = await products.getProduct(req.params.id)
 
-  if (product) {
-    res.sendCache(product)
-  } else {
-    res.status(404).send('Good try bro, but product aint here 🥲')
+    if (product) {
+      res.sendCache(product)
+    } else {
+      res.status(404).send('Good try bro, but product aint here 🥲')
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Server error')
   }
 }
 
 async function addProduct(req, res) {
-  const product = await products.addProduct(req.body)
+  try {
+    const product = await products.addProduct(req.body)
 
-  clearCache()
+    clearCache()
 
-  res.status(201).json(product)
+    res.status(201).json(product)
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Server error')
+  }
 }
 
 async function updateProduct(req, res) {
-  const product = await products.updateProduct(req.params.id, req.body)
+  try {
+    const product = await products.updateProduct(req.params.id, req.body)
 
-  if (product) {
-    clearCache()
-    res.json(product)
-  } else {
-    res.status(404).send('Product not found')
+    if (product) {
+      clearCache()
+      res.json(product)
+    } else {
+      res.status(404).send('Product not found')
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Server error')
   }
 }
 
 async function patchProduct(req, res) {
-  const product = await products.patchProduct(req.params.id, req.body)
+  try {
+    const product = await products.patchProduct(req.params.id, req.body)
 
-  if (product) {
-    clearCache()
-    res.json(product)
-  } else {
-    res.status(404).send('Product not found')
+    if (product) {
+      clearCache()
+      res.json(product)
+    } else {
+      res.status(404).send('Product not found')
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Server error')
   }
 }
-async function deleteProduct(req, res) {
-  const product = await products.deleteProduct(req.params.id)
 
-  if (product) {
-    clearCache()
-    res.json(product)
-  } else {
-    res.status(404).send('Product not found')
+async function deleteProduct(req, res) {
+  try {
+    const product = await products.deleteProduct(req.params.id)
+
+    if (product) {
+      clearCache()
+      res.json(product)
+    } else {
+      res.status(404).send('Product not found')
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Server error')
   }
 }
 
