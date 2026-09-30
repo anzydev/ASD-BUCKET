@@ -32,8 +32,25 @@ async function updateProduct(id, data) {
   return products[index]
 }
 
+async function patchProduct(id, data) {
+  const products = await readfile()
+
+  const index = products.findIndex(product => product.id === Number(id))
+
+  if (index === -1) {
+    return null
+  }
+
+  Object.assign(products[index], data)
+
+  await savefile(products)
+
+  return products[index]
+}
+
 module.exports = {
   readfile,
   savefile,
-  updateProduct
+  updateProduct,
+  patchProduct
 }

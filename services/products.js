@@ -24,9 +24,14 @@ async function updateProduct(id, data) {
   return await database.updateProduct(id, data)
 }
 
+async function patchProduct(id, data) {
+  return await database.patchProduct(id, data)
+}
+
 module.exports = {
   getProducts,
   getProduct,
   addProduct,
-  updateProduct
+  updateProduct,
+  patchProduct
 }
