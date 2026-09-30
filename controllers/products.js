@@ -1,4 +1,5 @@
 const products = require('../services/products')
+const { clearCache } = require('../middleware/cache')
 
 async function getProducts(req, res) {
   const data = await products.getProducts()
@@ -17,6 +18,8 @@ async function getProduct(req, res) {
 
 async function addProduct(req, res) {
   const product = await products.addProduct(req.body)
+
+  clearCache()
 
   res.status(201).json(product)
 }

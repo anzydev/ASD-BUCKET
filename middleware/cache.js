@@ -30,4 +30,13 @@ function cacheData(req, res, next) {
   next()
 }
 
-module.exports = cacheData
+function clearCache() {
+  for (const key in cache) {
+    delete cache[key]
+  }
+}
+
+module.exports = {
+  cacheData,
+  clearCache
+}

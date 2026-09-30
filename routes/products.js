@@ -1,6 +1,6 @@
 const express = require('express')
 const { getProducts, getProduct, addProduct } = require('../controllers/products')
-const cacheData = require('../middleware/cache')
+const { cacheData } = require('../middleware/cache')
 
 const router = express.Router()
 
