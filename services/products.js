@@ -1,16 +1,27 @@
-const readfile = require('../database/products')
+const database = require('../database/products')
 
 async function getProducts() {
-  return await readfile()
+  return await database.readfile()
 }
 
 async function getProduct(id) {
-  const products = await readfile()
+  const products = await database.readfile()
 
   return products.find(product => product.id === Number(id))
 }
 
+async function addProduct(product) {
+  const products = await database.readfile()
+
+  products.push(product)
+
+  await database.savefile(products)
+
+  return product
+}
+
 module.exports = {
   getProducts,
-  getProduct
+  getProduct,
+  addProduct
 }

@@ -8,4 +8,11 @@ async function readfile() {
   return JSON.parse(data)
 }
 
-module.exports = readfile
+async function savefile(products) {
+  await fs.writeFile(filePath, JSON.stringify(products, null, 2))
+}
+
+module.exports = {
+  readfile,
+  savefile
+}

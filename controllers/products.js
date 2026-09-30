@@ -15,7 +15,14 @@ async function getProduct(req, res) {
   }
 }
 
+async function addProduct(req, res) {
+  const product = await products.addProduct(req.body)
+
+  res.status(201).json(product)
+}
+
 module.exports = {
   getProducts,
-  getProduct
+  getProduct,
+  addProduct
 }
