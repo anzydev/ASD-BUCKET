@@ -1,14 +1,12 @@
-const readfile = require('../database/products')
+const products = require('../services/products')
 
 async function getProducts(req, res) {
-  const products = await readfile()
-  res.json(products)
+  const data = await products.getProducts()
+  res.json(data)
 }
 
 async function getProduct(req, res) {
-  const products = await readfile()
-
-  const product = products.find(product => product.id === Number(req.params.id))
+  const product = await products.getProduct(req.params.id)
 
   if (product) {
     res.json(product)

@@ -1,5 +1,4 @@
 const express = require('express');
-const readfile = require('./database/products')
 const { getProducts, getProduct } = require('./controllers/products')
 const app = express()
 const port = 3000
