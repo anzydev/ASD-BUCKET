@@ -28,6 +28,10 @@ async function getProduct(req, res) {
 
 async function addProduct(req, res) {
   try {
+    if (!req.body.name || req.body.price === undefined) {
+      return res.status(400).send('Name and price are required')
+    }
+
     const product = await products.addProduct(req.body)
 
     clearCache()
